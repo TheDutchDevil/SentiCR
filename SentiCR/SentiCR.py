@@ -32,7 +32,7 @@ from imblearn.over_sampling import SMOTE
 
 
 def replace_all(text, dic):
-    for i, j in dic.iteritems():
+    for i, j in dic.items():
         text = text.replace(i, j)
     return text
 
@@ -104,7 +104,7 @@ contractions_regex = re.compile('(%s)' % '|'.join(contractions_dict.keys()))
 def expand_contractions(s, contractions_dict=contractions_dict):
      def replace(match):
          return contractions_dict[match.group(0)]
-     return contractions_regex.sub(replace, s.lower())
+     return contractions_regex.sub(replace, s.decode('utf8').lower())
 
 
 url_regex = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
