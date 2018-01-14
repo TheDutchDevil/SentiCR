@@ -8,6 +8,7 @@ from sklearn.metrics import  f1_score
 import  random
 import csv
 import re
+import os
 
 import nltk
 from xlrd import open_workbook
@@ -79,8 +80,8 @@ contractions_dict=[]
 
 
 # Read in the words with sentiment from the dictionary
-with open("Contractions.txt","r") as contractions,\
-     open("EmoticonLookupTable.txt","r") as emotable:
+with open(os.path.join(os.path.dirname(__file__), "Contractions.txt"),"r") as contractions,\
+     open(os.path.join(os.path.dirname(__file__), "EmoticonLookupTable.txt"),"r") as emotable:
     contractions_reader=csv.reader(contractions, delimiter='\t')
     emoticon_reader=csv.reader(emotable,delimiter='\t')
 
@@ -248,7 +249,7 @@ class SentiCR:
         return model
 
     def read_data_from_oracle(self):
-        workbook = open_workbook("oracle.xlsx")
+        workbook = open_workbook(os.path.join(os.path.dirname(__file__), "oracle.xlsx"))
         sheet = workbook.sheet_by_index(0)
         oracle_data=[]
         print("Reading data from oracle..")
@@ -327,7 +328,7 @@ if __name__ == '__main__':
     print("Algrithm: " + ALGO)
     print("Repeat: " + str(REPEAT))
 
-    workbook = open_workbook("oracle.xlsx")
+    workbook = open_workbook(os.path.join(os.path.dirname(__file__), "oracle.xlsx"))
     sheet = workbook.sheet_by_index(0)
     oracle_data = []
 
