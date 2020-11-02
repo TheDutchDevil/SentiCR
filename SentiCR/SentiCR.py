@@ -29,7 +29,7 @@ from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 
 from nltk.stem.snowball import SnowballStemmer
-from imblearn.over_sampling import SMOTE
+from imblearn.over_sampling import SVMSMOTE
 
 
 def replace_all(text, dic):
@@ -238,8 +238,8 @@ class SentiCR:
         Y_train = np.array(training_ratings)
 
         #Apply SMOTE to improve ratio of the minority class
-        smote_model = SMOTE(ratio=0.5, random_state=None, k=None, k_neighbors=15, m=None, m_neighbors=15, out_step=.0001,
-                   kind='regular', svm_estimator=None, n_jobs=1)
+        smote_model = SVMSMOTE(sampling_strategy=0.5, random_state=None, k_neighbors=15, m_neighbors=15, out_step=.0001,
+                    svm_estimator=None, n_jobs=1)
 
         X_resampled, Y_resampled=smote_model.fit_sample(X_train, Y_train)
 
