@@ -10,6 +10,20 @@ models based on 1600 manually label code review comments (https://github.com/sen
 - Special handling of negation phrases through precise identification 
 - Optimized for the SE domain 
 
+## Getting started
+
+Download the repository, ensure you're using Python 3.8 and then install all
+dependencies. This is done by running the following commands:
+
+`pip install -r --user SentiCR/requirements.txt`
+
+`python SentiCR/setup-nltk.py`
+
+## This Fork
+
+In this fork, SentiCR is updated to run on Python 3.8, and some more information
+on how to get SentiCR up and running is included. 
+
 ## Performance
 In our hundred ten-fold cross-validations, SentiCR achieved 83.03% accuracy (i.e., human level accuracy), 67.84% precision, 
 58.35% recall, and 0.62 f-score on a Gradient Boosting Tree based model. Details cross validation results are included here: 
