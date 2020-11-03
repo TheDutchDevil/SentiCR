@@ -9,6 +9,7 @@ import  random
 import csv
 import re
 import os
+import codecs
 
 import nltk
 from xlrd import open_workbook
@@ -30,6 +31,12 @@ from sklearn.tree import DecisionTreeClassifier
 
 from nltk.stem.snowball import SnowballStemmer
 from imblearn.over_sampling import SVMSMOTE
+
+from pkg_resources import resource_stream
+
+nltk.download('averaged_perceptron_tagger')
+nltk.download('universal_tagset')
+nltk.download('punkt')
 
 
 def replace_all(text, dic):
@@ -80,10 +87,10 @@ contractions_dict=[]
 
 
 # Read in the words with sentiment from the dictionary
-with open(os.path.join(os.path.dirname(__file__), "Contractions.txt"),"r") as contractions,\
-     open(os.path.join(os.path.dirname(__file__), "EmoticonLookupTable.txt"),"r") as emotable:
-    contractions_reader=csv.reader(contractions, delimiter='\t')
-    emoticon_reader=csv.reader(emotable,delimiter='\t')
+with resource_stream('SentiCR', "Contractions.txt") as contractions,\
+    resource_stream('SentiCR', "EmoticonLookupTable.txt") as emotable:
+    contractions_reader=csv.reader(codecs.getreader("utf-8")(contractions), delimiter='\t')
+    emoticon_reader=csv.reader(codecs.getreader("utf-8")(emotable),delimiter='\t')
 
     #Hash words from dictionary with their values
     contractions_dict = {rows[0]:rows[1] for rows in contractions_reader}
@@ -249,7 +256,7 @@ class SentiCR:
         return model
 
     def read_data_from_oracle(self):
-        workbook = open_workbook(os.path.join(os.path.dirname(__file__), "oracle.xlsx"))
+        workbook = open_workbook(file_contents = resource_stream("SentiCR", "oracle.xlsx").read())
         sheet = workbook.sheet_by_index(0)
         oracle_data=[]
         print("Reading data from oracle..")
@@ -328,7 +335,7 @@ if __name__ == '__main__':
     print("Algrithm: " + ALGO)
     print("Repeat: " + str(REPEAT))
 
-    workbook = open_workbook(os.path.join(os.path.dirname(__file__), "oracle.xlsx"))
+    workbook = open_workbook(file_contents = resource_stream("SentiCR", "oracle.xlsx").read())
     sheet = workbook.sheet_by_index(0)
     oracle_data = []
 
