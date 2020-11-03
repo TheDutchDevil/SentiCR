@@ -13,5 +13,5 @@ setup(
     package_data = {'SentiCR': [
                 'Contractions.txt',
                 'EmoticonLookupTable.txt',
-                'Oracle.xlsx']}
+                'oracle.xlsx']}
 )
