@@ -1,8 +1,9 @@
 
 # SentiCR
 
-SentiCR is an automated sentiment analysis tool for code review comments. SentiCR uses supervised learning algorithms to train 
-models based on 1600 manually label code review comments (https://github.com/senticr/SentiCR/blob/master/SentiCR/oracle.xlsx). Features of SentiCR include:
+SentiCR is an automated sentiment analysis tool for code review comments originally developed by Ahmed et al. and published on [GitHub](https://github.com/senticr/SentiCR). 
+
+SentiCR uses supervised learning algorithms to train models based on 1600 manually label code review comments (https://github.com/senticr/SentiCR/blob/master/SentiCR/oracle.xlsx). Features of SentiCR include:
 
 - Special preprocessing steps to exclude URLs and code snippets
 - Special preprocessing for emoticons
@@ -10,23 +11,26 @@ models based on 1600 manually label code review comments (https://github.com/sen
 - Special handling of negation phrases through precise identification 
 - Optimized for the SE domain 
 
+This fork of SentiCR ports SentiCR to Python 3.8 (Based on the work by [eslerd](https://github.com/eslerd/SentiCR)), and makes SentiCR available as a package. Hopefully allowing for easier usage and retraining of SentiCR. 
+
 ## Getting started
 
-Download the repository, ensure you're using Python 3.8 and then install all
-dependencies. This is done by running the following commands:
+To use this fork of SentiCR you have to install the package using pip, and then you can use the SentiCR class as exposed by the package. 
 
-`pip install -r --user SentiCR/requirements.txt`
+`pip install git+https://github.com/TheDutchDevil/SentiCR.git`
 
-`python SentiCR/setup-nltk.py`
+```
+from SentiCR import SentiCR
 
-## This Fork
+senti = SentiCR()
 
-In this fork, SentiCR is updated to run on Python 3.8, and some more information
-on how to get SentiCR up and running is included. 
+senti.get_sentiment_polarity("This code frankly sucks!")
+```
+
 
 ## Performance
-In our hundred ten-fold cross-validations, SentiCR achieved 83.03% accuracy (i.e., human level accuracy), 67.84% precision, 
-58.35% recall, and 0.62 f-score on a Gradient Boosting Tree based model. Details cross validation results are included here: 
+In the hundred ten-fold cross-validations performed by the original authors, SentiCR achieved 83.03% accuracy (i.e., human level accuracy), 67.84% precision, 
+58.35% recall, and 0.62 f-score on a Gradient Boosting Tree based model. Detailed cross validation results can be found in the original repository included here: 
 https://github.com/senticr/SentiCR/tree/master/cross-validation-results
 
 ## Cite
