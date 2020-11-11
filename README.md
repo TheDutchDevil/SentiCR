@@ -19,6 +19,8 @@ To use this fork of SentiCR you have to install the package using pip, and then 
 
 `pip install git+https://github.com/TheDutchDevil/SentiCR.git`
 
+Then in a Python script you can use the following lines to run SentiCR:
+
 ```
 from SentiCR import SentiCR
 
